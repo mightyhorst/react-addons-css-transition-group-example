@@ -1,9 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import "./animation.css";
-import "./styles.css";
+import './animation.css';
+import './styles.css';
 const itemCss = {
     fontSize: '20px',
     height: '75px',
@@ -20,51 +20,75 @@ const itemCss = {
     marginBottom: '9px',
     transition: 'all .4s',
     overflow: 'hidden',
-    position: 'relative',
+    position: 'relative'
+};
+function ToDoItem({ id, message, index, onRemove }) {
+    return (
+        <div key={id} onClick={() => onRemove(index)} style={itemCss}>
+            {message}
+        </div>
+    );
 }
+function ToDoList() {
+    const [items, setItems] = useState([
+        {
+            id: 'hello',
+            message: 'hello'
+        },
+        {
+            id: 'world',
+            message: 'world'
+        },
+        {
+            id: 'click',
+            message: 'click'
+        },
+        {
+            id: 'me',
+            message: 'me'
+        }
+    ]);
+    const onAdd = () => {
+      const newItem = prompt('Enter some text');
+        const newItems = [
+          ...items,
+          {
+            id: newItem,
+            message: newItem,
+          }
+        ];
+        setItems(newItems);
+    };
 
-class TodoList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { items: ["hello", "world", "click", "me"] };
-    this.handleAdd = this.handleAdd.bind(this);
-  }
-
-  handleAdd() {
-    const newItems = this.state.items.concat([prompt("Enter some text")]);
-    this.setState({ items: newItems });
-  }
-
-  handleRemove(i) {
-    let newItems = this.state.items.slice();
-    newItems.splice(i, 1);
-    this.setState({ items: newItems });
-  }
-
-  render() {
-    const items = this.state.items.map((item, i) => (
-      <div 
-        key={item} 
-        onClick={() => this.handleRemove(i)}
-        style={itemCss}
-      >
-        {item}
-      </div>
-    ));
+    const onRemove = (i) => {
+        let newItems = items.slice();
+        newItems.splice(i, 1);
+        setItems(newItems);
+    };
 
     return (
-      <div className='App'>
-        <button onClick={this.handleAdd}>Add Item</button>
-        <ReactCSSTransitionGroup
-          transitionName="example"
-          transitionEnterTimeout={1000}
-          transitionLeaveTimeout={1000}
-        >
-          {items}
-        </ReactCSSTransitionGroup>
-      </div>
+        <div className="App">
+            <button onClick={onAdd}>Add Item</button>
+
+            <ReactCSSTransitionGroup
+                transitionName="example"
+                transitionEnterTimeout={1000}
+                transitionLeaveTimeout={1000}
+            >
+                {items.map(({ id, message }, index) => {
+                    return (
+                        <ToDoItem
+                            id={id}
+                            message={message}
+                            index={index}
+                            onRemove={onRemove}
+                        />
+                    );
+                })}
+            </ReactCSSTransitionGroup>
+        </div>
     );
-  }
 }
-const rootElement = document.getElementById("root");
-ReactDOM.render(<TodoList />, rootElement);
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<ToDoList />, rootElement);
