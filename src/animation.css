@@ -1,0 +1,34 @@
+@keyframes toastAnimateIn{
+    0%{
+       transform: translateX(-70vw) skew(-10deg, 0deg);
+       opacity: 0; 
+       height: 0px;
+    }
+    100%{
+        transform: translateX(0vw) skew(0deg);
+        opacity: 1;
+        height: 75px;
+    }
+}
+@keyframes toastAnimateOut{
+    0%{
+       transform: translateX(0);
+       opacity: 1; 
+       height: 75px;
+    }
+    70%{
+        height: 75px;
+    }
+    100%{
+        transform: translateX(70vw) skew(-10deg, 0deg);
+        opacity: 0;
+        height: 0;
+    }
+}
+
+.toastAnimateIn, .enterActive {
+    animation: toastAnimateIn 1s forwards;
+}
+.toastAnimateOut {
+    animation: toastAnimateOut 1s forwards;
+}

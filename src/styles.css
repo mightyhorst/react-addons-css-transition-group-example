@@ -1,0 +1,50 @@
+*{
+  padding: 0;
+  margin: 0px;
+  box-sizing: border-box;
+}
+html, body{
+  padding: 0;
+  margin: 0px;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0px;
+  background: #32393f;
+  color: white;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.example-enter {
+  /* opacity: 0.01; */
+  animation: toastAnimateIn 1s forwards;
+}
+
+.example-enter.example-enter-active {
+  /* opacity: 1;
+  transition: opacity 500ms ease-in; */
+  animation: toastAnimateIn 1s forwards;
+}
+
+.example-leave {
+  /* opacity: 1; */
+  /* animation: toastAnimateOut 1s forwards; */
+}
+
+.example-leave.example-leave-active {
+  /* opacity: 0.01;
+  transition: opacity 300ms ease-in; */
+  animation: toastAnimateOut 1s forwards;
+}
+
+
