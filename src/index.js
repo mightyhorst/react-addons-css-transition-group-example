@@ -68,7 +68,13 @@ function ToDoList() {
 
     return (
         <div className="App">
-            <button onClick={onAdd}>Add Item</button>
+            
+            <button 
+              className='addItem'
+              onClick={onAdd}
+            >
+              Add Item
+            </button>
 
             <ReactCSSTransitionGroup
                 transitionName="example"
